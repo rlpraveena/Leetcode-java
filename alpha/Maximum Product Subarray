@@ -1,0 +1,26 @@
+public class Solution {
+    public int maxProduct(int[] A) {
+        
+        int cp=A[0];
+        int cn=A[0];
+        int op=A[0];
+        int on=A[0];
+        
+        for(int i=1;i<A.length;i++)
+        {
+            int tmp=cp;
+            
+            cp = Math.max(A[i], Math.max(A[i]*cp,A[i]*cn));
+            cn = Math.min(A[i], Math.min(A[i]*tmp,A[i]*cn));
+            op = Math.max(op,cp);
+            on = Math.max(on,cn);
+            
+            
+            
+        }
+        
+        return op;
+
+        
+        }
+}
