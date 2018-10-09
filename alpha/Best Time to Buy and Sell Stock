@@ -1,0 +1,19 @@
+class Solution
+{
+  public int sell(int[] prices)
+  {
+      int maxsofar=0,maxcurrent=0;
+      
+      for(int i=1;i<prices.length;i++)
+      {
+        maxcurrent+=prices[i]-prices[i-1];
+        maxcurrent=Math.max(0,maxcurrent);
+        maxsofar=Math.max(maxcurrent,maxsofar);
+      }
+      
+      return maxsofar;
+      
+  
+  }
+
+}
