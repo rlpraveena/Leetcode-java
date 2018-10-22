@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Solution
+{
+
+
+    public static List<Integer> find(int n)
+    {
+
+        List<Integer> list = new ArrayList<>();
+
+        int upperlimit= (int) Math.sqrt(n);
+
+        for(int i=1;i<upperlimit;i++)
+        {
+            if(n%i==0)
+                list.add(i);
+
+            if(i!=Math.sqrt(n))
+            {
+                list.add(n/i);
+            }
+
+        }
+
+        Collections.sort(list);
+
+        return list;
+
+    }
+
+
+
+    public static void main(String[] args)
+    {
+
+        Solution s = new Solution();
+        System.out.println(s.find(10));
+
+    }
+
+}
