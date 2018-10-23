@@ -1,0 +1,9 @@
+boolean isDouble(String input) {
+        try {
+            Double.parseDouble(input);
+            return true;
+        } catch (NumberFormatException e) {
+            //You can send the message which you want to show to your users here.
+            return false;
+        }
+    }
