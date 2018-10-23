@@ -1,0 +1,29 @@
+class GFG { 
+      
+    static boolean isPerfectSquare(double x)  
+    { 
+          
+        // Find floating point value of square root of x 
+      
+        double sr = Math.sqrt(x); 
+      
+        // If square root is an integer 
+        return ((sr - Math.floor(sr)) == 0); 
+    } 
+      
+
+    public static void main(String[] args)  
+    { 
+        double x = 2500; 
+          
+        if (isPerfectSquare(x)) 
+            System.out.print("Yes"); 
+        else
+            System.out.print("No"); 
+    } 
+} 
+
+
+/* Math.sqrt complexity if O(1) since it used a number of processors hence the complexity is O(1). */
+Math.floor(-5.05) -> -6
+Math.floor(5.95) -> 5
