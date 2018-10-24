@@ -1,0 +1,40 @@
+left. data <= current. data < right. data for each node. But this condition is not sufficient when:
+ 20
+ /\
+10 30
+\
+25
+
+Although each node is bigger than its left node and smaller than its right node, this is clearly not a binary
+search tree since 25 is in the wrong place.
+
+The condition is that all left nodes(10,25 etc..) must be less than or equal to the current node(20), which
+must be less than all the right nodes(30 etc).
+
+We go through the tree with this approach. When we branch left, the max must get updated. When we
+branch right, the min must get updated. If anything fails, we stop and we return false.
+TC : O(N)
+Space:O(logN) on a balanced tree due to recursion.
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+public boolean isValidBST(TreeNode root) {
+    return isValid(root, null, null);
+}
+
+public boolean isValid(TreeNode root, Integer min, Integer max) {
+    if(root == null) return true; // base condition
+    if(min != null && root.val <= min) return false;
+    if(max != null && root.val >= max) return false;
+    
+    return isValid(root.left, min, root.val) && isValid(root.right, root.val, max);
+}}
+
+
