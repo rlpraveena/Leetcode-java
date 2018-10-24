@@ -1,0 +1,85 @@
+
+Kadane's algorithm - O(N)
+class Solution {
+
+    public static int maxSubArray(int[] A) {
+        
+        int maxsofar=A[0],maxendinghere=A[0];
+        
+        for(int i=1;i<A.length;i++)
+        {
+            maxendinghere=Math.max(maxendinghere+A[i],A[i]);
+            maxsofar=Math.max(maxsofar,maxendinghere);
+        }
+        
+        return maxsofar;
+}
+ 
+}
+
+Divide & Conquer - O(NlogN)
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        return maxSubArray(nums, 0, nums.length-1);
+    }
+    
+    private int maxSubArray(int[] nums, int left, int right) {
+        if (left > right) return Integer.MIN_VALUE;
+        if (left == right) return nums[left];
+        int mid = (left + right) / 2;
+        int L = maxSubArray(nums, left, mid-1);
+        int R = maxSubArray(nums, mid+1, right);
+        int leftSum = 0;
+        int tmp = 0;
+        for (int i=mid-1; i>=left; i--) {
+            tmp += nums[i];
+            if (tmp > leftSum) leftSum = tmp;
+        }
+        tmp = 0;
+        int rightSum = 0;
+        for (int i=mid+1; i<=right; i++) {
+            tmp += nums[i];
+            if (tmp > rightSum) rightSum = tmp;
+        }
+        return Math.max(Math.max(L, R), leftSum + rightSum + nums[mid]);
+    }
+}
+
+
+
+To print the array:
+
+public class Kadane {
+  double[] maxSubarray(double[] a) {
+    double max_so_far = 0;
+    double max_ending_here = 0;
+    int max_start_index = 0;
+    int startIndex = 0;
+    int max_end_index = -1;
+
+    for(int i = 0; i < a.length; i++) {
+      if(0 > max_ending_here +a[i]) {
+        startIndex = i+1;
+        max_ending_here = 0;
+      }
+      else {
+        max_ending_here += a[i];
+      }
+
+      if(max_ending_here > max_so_far) {
+        max_so_far = max_ending_here;
+        max_start_index = startIndex;
+        max_end_index = i;
+      }
+    }
+
+    if(max_start_index <= max_end_index) {
+      return Arrays.copyOfRange(a, max_start_index, max_end_index+1);
+    }
+
+    return null;
+  }
+}
+
