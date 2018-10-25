@@ -1,0 +1,83 @@
+
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+
+public class BSTIterator {
+    Stack<TreeNode> stack = new Stack<>();
+    public BSTIterator(TreeNode root) {
+        addLeftMost(root);
+    }
+
+    /** @return whether we have a next smallest number */
+    public boolean hasNext() {
+        return !stack.isEmpty();
+    }
+
+    /** @return the next smallest number */
+    public int next() {
+        if (!hasNext()) return -1;
+        TreeNode cur = stack.pop();
+        addLeftMost(cur.right);
+            System.out.println(cur.val);
+        return cur.val;
+    }
+    //add all left most nodes for a tree of which the root is node
+    private void addLeftMost(TreeNode node) {
+        while (node != null) {
+            stack.push(node);
+            node = node.left;
+        }
+    }
+}
+
+    3
+
+
+/**
+ * Your BSTIterator will be called like this:
+ * BSTIterator i = new BSTIterator(root);
+ * while (i.hasNext()) v[f()] = i.next();
+ */
+
+
+
+
+	          1
+            /\
+          2   3
+         /\
+       4    5
+
+
+Stack
+4
+2
+1
+
+Cur=4
+
+2
+1
+
+Cur=2
+5
+1
+
+Cur=5
+1
+
+Cur=1
+3
+
+Cur=3
+
+
+
+Print: 4	 2 5 1 3
