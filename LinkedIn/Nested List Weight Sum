@@ -16,3 +16,7 @@ private int helper(List<NestedInteger> list, int depth)
     return ret;
 }
 }
+
+
+ip: [ [1,1] , 2 , [1,1] ]
+op: 4 1s at depth 2 + 1 2 at depth 1 = 10
