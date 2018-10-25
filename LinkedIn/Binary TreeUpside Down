@@ -1,0 +1,104 @@
+  Top down appraoch
+  
+  /**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+public TreeNode upsideDownBinaryTree(TreeNode root) {
+    TreeNode curr = root;
+    TreeNode next = null;
+    TreeNode temp = null;
+    TreeNode prev = null;
+    
+    while(curr != null) {
+            System.out.println(curr.val);
+            
+        next = curr.left;
+        
+        // swapping nodes now, need temp to keep the previous right child
+        curr.left = temp;
+        temp = curr.right;
+        curr.right = prev;
+        
+        prev = curr;
+        curr = next;
+          
+            
+           
+    }
+    return prev;
+}  
+}
+
+O(1) space
+O(N) Time
+
+cur=1
+next=2
+cur.left=null
+temp=3
+cur.right=null
+prev=1
+cur=2
+
+cur=2
+next=4
+cur.left=3
+temp=5
+cur.right=1
+prev=2
+cur=4
+
+cur=4
+next=null
+cur.left=5
+temp=cur.right=null
+cur.right=2
+prev=4
+cur=null
+
+Since curr is null,loop breaks
+  
+  i/p:  
+  1
+ /\
+2  3
+/\
+4  5
+
+o/p: [4,5,2,null,null,3,1]
+
+1
+/
+2-3
+/
+4-5
+
+4
+/\
+5 2
+  /\
+  3  1
+  
+  Recurrsive:
+  Bottom up approach
+  
+  public TreeNode upsideDownBinaryTree(TreeNode root) {
+    if(root == null || root.left == null) {
+        return root;
+    }
+    
+    TreeNode newRoot = upsideDownBinaryTree(root.left);
+    root.left.left = root.right;   // node 2 left children
+    root.left.right = root;         // node 2 right children
+    root.left = null;
+    root.right = null;
+    return newRoot;
+}
+
