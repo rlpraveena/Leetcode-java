@@ -1,0 +1,26 @@
+
+public class Solution {
+public int depthSumInverse(List<NestedInteger> nestedList) {
+    int unweighted = 0, weighted = 0;
+    while (!nestedList.isEmpty()) {
+        List<NestedInteger> nextLevel = new ArrayList<>();
+        for (NestedInteger ni : nestedList) {
+            if (ni.isInteger())
+            {
+                     unweighted += ni.getInteger();
+                  //  System.out.println(unweighted);
+            }
+               
+            else
+                nextLevel.addAll(ni.getList());
+        }
+        weighted += unweighted;
+            System.out.println(weighted);
+        nestedList = nextLevel;
+    }
+    return weighted;
+}
+}
+
+ip:[1,[4,[6]]]
+op:17
