@@ -1,0 +1,49 @@
+public class Solution
+{
+    public List<List<Integer>> levelOrder(TreeNode root)
+    {
+        List<List<Integer>> answer = new ArrayList<>();
+        System.out.println("node value "+" "+"depth"+" "+"list.size()"+" "+"list");
+	levelOrderHelper(root, answer, 0);
+        
+	return answer;
+    }
+	
+    private void levelOrderHelper(TreeNode node, List<List<Integer>> list, int depth)
+    {
+	if (node == null) return;
+    //initally list size is 0
+        System.out.println(node.val+"\t \t"+depth+" \t"+list.size()+" \t"+list); 
+	if (depth >=list.size())
+	{
+	    list.add(new ArrayList<>());
+	}
+	list.get(depth).add(node.val);
+    
+          
+	levelOrderHelper(node.left, list, depth + 1);
+	levelOrderHelper(node.right, list, depth + 1);
+         
+    }
+}
+// Using dfs
+//Time : O (N)
+
+i/P:
+[3,9,20,null,null,15,7]
+
+   3
+   / \
+  9  20
+    /  \
+   15   7
+
+node   depth list.size() list
+3       0       0         [3]
+9       1       1         [[3] , [9]]
+20      1       2         [[3] , [9,20] ]
+15      2       2         [[3] , [9,20] , [15] ]
+17      2       3         [[3] , [9,20] , [15,7]]
+
+Your answer
+[[3],[9,20],[15,7]]
