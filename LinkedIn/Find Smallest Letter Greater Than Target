@@ -14,7 +14,7 @@ class Solution {
             else
                 right=mid;
         }
-        
+        //Because lo can end up pointing to index 'n', in which case we return the first element
         return letters[left%letters.length];
       
         
