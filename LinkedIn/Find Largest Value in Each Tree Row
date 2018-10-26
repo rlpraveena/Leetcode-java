@@ -1,0 +1,45 @@
+class Solution {
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> list=new ArrayList<>();
+        System.out.println("curr.val"+" "+"level"+" "+"list.size()"+" "+"list.get(level)"+" "+"list");
+        compute(root,list,0);
+        return list;
+        
+    }
+    
+    public void compute(TreeNode curr,List<Integer> list,int level)
+    {
+        if(curr==null) return;
+        
+        if(list.size()==level)
+            list.add(curr.val);
+        
+        if(curr.val>list.get(level))
+            list.set(level,curr.val);
+        
+        System.out.println(curr.val+"\t"+level+"   \t"+list.size()+"\t\t"+list.get(level)+"\t\t"+list);
+        
+        compute(curr.left,list,level+1);
+        compute(curr.right,list,level+1); // read in pre order traversal style
+    }
+}
+
+Time : O(N)
+Space MAYBE O(H)
+
+ip: [1,2,3,5,3,null,10]
+
+          1
+         / \
+        2   3
+       / \   \  
+      5   3   10 
+
+op: [1,3,10]
+curr.val level list.size() list.get(level) list
+1	0   	1		1		[1]
+2	1   	2		2		[1, 2]
+5	2   	3		5		[1, 2, 5]
+3	2   	3		5		[1, 2, 5]
+3	1   	3		3		[1, 3, 5]
+10	2   	3		10		[1, 3, 10]
