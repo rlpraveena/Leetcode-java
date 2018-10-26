@@ -1,0 +1,27 @@
+class Solution {
+public int shortestDistance(String[] words, String word1, String word2) {
+    int pos1 = -1, pos2 = -1, min = Integer.MAX_VALUE;
+    
+    for (int i = 0; i < words.length; i++) {
+        if (words[i].equals(word1)) 
+        {pos1 = i;}
+
+        if (words[i].equals(word2)) 
+        { pos2 = i;}
+            
+        if (pos1 != -1 && pos2 != -1)
+        {  min = Math.min(min, Math.abs(pos1 - pos2));}
+    }
+    
+    return min;
+}
+}
+
+
+// Time - O(N)
+// Space - O(1) not allocating any extra space
+Assume that words = ["happy", "car", "perfect", "lucky", "car"]
+Input: word1 = “lucky”, word2 = “happy”
+Output: 3
+Input: word1 = "car", word2 = "lucky"
+Output: 1
