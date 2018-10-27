@@ -1,0 +1,49 @@
+
+public class WordDistance {
+
+private Map<String, List<Integer>> map;
+
+public WordDistance(String[] words) {
+    map = new HashMap<String, List<Integer>>();
+    for(int i = 0; i < words.length; i++) {
+        String w = words[i];
+        if(map.containsKey(w)) {
+            map.get(w).add(i);
+        } else {
+            List<Integer> list = new ArrayList<Integer>();
+            list.add(i);
+            map.put(w, list);
+        }
+        
+    }
+   // System.out.println(map.keySet());
+    // System.out.println(map.values());
+    
+}
+
+public int shortest(String word1, String word2) {
+    List<Integer> list1 = map.get(word1);
+    System.out.println(list1);
+    List<Integer> list2 = map.get(word2);
+    System.out.println(list2);
+    int ret = Integer.MAX_VALUE;
+    for(int i = 0, j = 0; i < list1.size() && j < list2.size(); ) {
+        int index1 = list1.get(i), index2 = list2.get(j);
+        if(index1 < index2) {
+            ret = Math.min(ret, index2 - index1);
+            i++;
+        } else {
+            ret = Math.min(ret, index1 - index2);
+            j++;
+        }
+    }
+    return ret;
+}
+}
+
+Format of the input :["WordDistance","shortest","shortest"]
+i/p :[[["happy","go","lucky","in","happy"]],["happy","go"],["in","lucky"]]
+Keys [lucky, in, happy, go]
+Values [[2], [3], [0, 4], [1]]
+
+o/p : [null,1,1]
