@@ -7,6 +7,12 @@
  *     Interval(int s, int e) { start = s; end = e; }
  * }
  */
+ 
+ The idea is to sort the intervals by their starting points. 
+ Then, we take the first interval and compare its end with the next intervals starts. 
+ As long as they overlap, we update the end to be the max end of the overlapping intervals. 
+ Once we find a non overlapping interval, we can add the previous interval and start over.
+ 
 class Solution {
 public List<Interval> merge(List<Interval> intervals) {
     if (intervals.size() <= 1)
