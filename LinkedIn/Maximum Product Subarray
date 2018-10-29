@@ -1,0 +1,41 @@
+public class Solution {
+    public int maxProduct(int[] A) {
+        
+         if (A == null || A.length == 0) {
+            return 0;
+        }
+        
+        int cp=A[0];
+        int cn=A[0];
+        int op=A[0];
+        int on=A[0];
+        
+        for(int i=1;i<A.length;i++)
+        {
+            int tmp=cp;
+            
+            cp = Math.max(A[i], Math.max(A[i]*cp,A[i]*cn));
+            cn = Math.min(A[i], Math.min(A[i]*tmp,A[i]*cn));
+            op = Math.max(op,cp);
+            on = Math.max(on,cn);
+            
+            
+            
+        }
+        
+        return op;
+
+        
+        }
+}
+
+Time: O(N)
+Space: O(1)
+
+Input: [2,3,-2,4]
+Output: 6
+Explanation: [2,3] has the largest product 6.
+
+Input: [-2,0,-1]
+Output: 0
+Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
