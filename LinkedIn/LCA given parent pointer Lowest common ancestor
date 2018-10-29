@@ -1,0 +1,93 @@
+public Node commonAncestor(Node nodeOne, Node nodeTwo)
+
+class Node {
+
+final Node parent; 
+final Node left; 
+final Node right; 
+final char data;
+
+
+public Node(Node parent, Node left, Node right, char data) { 
+    this.parent = parent; 
+    this.left = left; 
+    this.right = right; 
+    this.data = data;
+}
+
+boolean isRoot() { 
+    return parent == null; 
+}
+}
+
+Time- O(logn)
+Space - O(1)
+
+1. Find the height of both the nodes from the root.
+2. Subtract the heights and get the difference.
+3. The node which is closer to the root is always dh(difference of height) steps ahead of the deeper node.
+//We could eliminate the need of marking visited nodes altogether.
+Because:
+ If we advance the deeper node dh steps above, both nodes would be at the same depth.
+ Then, we advance both nodes one level at a time.
+ They would then eventually intersect at one node, which is the LCA of both nodes. 
+ If not, one of the node would eventually reach NULL (root’s parent), which we conclude that both nodes are not in the 
+ same tree. However, that part of code shouldn’t be reached, since the problem statement assumed that both nodes are in
+ the same tree.
+ 
+public static Node commonAncestor2(Node node1, Node node2) {
+    int height1 = 0;
+    Node tmpNode1 = node1;
+    while (!tmpNode1.isRoot()) {
+        ++height1;
+        tmpNode1 = tmpNode1.parent;
+    }
+    int height2 = 0;
+    Node tmpNode2 = node2;
+    while (!tmpNode2.isRoot()) {
+        ++height2;
+        tmpNode2 = tmpNode2.parent;
+    }
+    int diff = height1 - height2;
+    if (diff > 0) {
+        while (diff != 0) {
+            node1 = node1.parent;
+            --diff;
+        }
+    } else {
+        while (diff != 0) {
+            node2 = node2.parent;
+            ++diff;
+        }
+    }
+    // special case, node1 is node2's parent, or node2 is node1's parent
+    if (node1 == node2) {  
+        return node1.parent;
+    }
+    while (node1 != node2) {
+        node1 = node1.parent;
+        node2 = node2.parent;
+    }
+    return node1;
+}
+
+
+Space - O(logn)
+public static Node commonAncestor(Node node1, Node node2) {
+    Set<Node> path = new HashSet<Node>();
+    Node temp=node1;
+    while (!node1.isRoot()) {
+        path.add(node1.parent);
+        node1 = node1.parent;
+    }
+    while (!node2.isRoot() ) {
+        if (path.contains(node2.parent)) {
+          if(node2.parent!=temp) // special case, node1 is node2's parent, or node2 is node1's parent
+          {
+            return node2.parent;
+          }  
+        }
+        node2 = node2.parent;
+    }
+    return null;
+} 
