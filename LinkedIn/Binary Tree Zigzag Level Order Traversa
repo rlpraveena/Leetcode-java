@@ -7,6 +7,8 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+ 
+ // travel tree in dfs pre order fashion
 class Solution {
 
     public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
@@ -23,10 +25,10 @@ class Solution {
             list.add(new ArrayList<Integer>());
         
 
-        if (level % 2 == 0) 
+        if (level % 2 == 0) // if even just add to the list
             list.get(level).add(curr.val);
         else 
-            list.get(level).add(0, curr.val);
+            list.get(level).add(0, curr.val); //if odd add the value to the beginning of the list every time
         
         System.out.println(curr.val+"\t "+list.size()+"\t "+level+"\t "+list);
         compute(curr.left, list, level + 1);
