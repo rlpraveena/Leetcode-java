@@ -26,6 +26,15 @@ class Solution {
          /  \
          7   4
 
+check if 3 is the same as 5,4? if not go down check for 5. if yes for 5,5 returns 5 upwards.
+6 returns null
+2 null
+7 null
+4 4
+1 null
+0 null
+8 null
+5 has 5 & 4 hence 5 is the LCA because none of the values were null.
 
 Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
 Output: 5
