@@ -29,7 +29,7 @@ public class Solution
 // Using dfs
 //Time : O (N)
 
-i/P:
+i/p:
 [3,9,20,null,null,15,7]
 
    3
@@ -37,6 +37,9 @@ i/P:
   9  20
     /  \
    15   7
+   
+o/p: [[3],[9,20],[15,7]]
+
 
 node   depth list.size() list
 3       0       0         [3]
@@ -45,5 +48,3 @@ node   depth list.size() list
 15      2       2         [[3] , [9,20] , [15] ]
 17      2       3         [[3] , [9,20] , [15,7]]
 
-Your answer
-[[3],[9,20],[15,7]]
