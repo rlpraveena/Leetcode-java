@@ -2,14 +2,14 @@
 // Time Complexity: O(n), Space Complexity: O(n)
 public class Solution {
     public boolean isIsomorphic(String s, String t) {
-        if (s.length() != t.length()) return false;
+        if (s.length() != t.length()) return false; // if the two strings are not of equal length,return false
 
-        final Map<Character,Character> map1 = new HashMap<>();
-        final Map<Character,Character> map2 = new HashMap<>();
+         Map<Character,Character> map1 = new HashMap<>(); // create two maps with key and value's type as character
+         Map<Character,Character> map2 = new HashMap<>();
 
-        for (int  i = 0; i < s.length(); ++i) {
-            final char c1 = s.charAt(i);
-            final char c2 = t.charAt(i);
+        for (int  i = 0; i < s.length(); i++) {
+             char c1 = s.charAt(i);
+             char c2 = t.charAt(i);
 
             if (map1.containsKey(c1)) {
                 if (map1.get(c1) != c2) return false;
@@ -26,3 +26,6 @@ public class Solution {
         return true;
     }
 }
+
+Input: s = "foo", t = "bar"
+Output: false
