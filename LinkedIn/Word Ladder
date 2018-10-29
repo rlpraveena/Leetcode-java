@@ -11,46 +11,52 @@ class Solution {
         System.out.println(reached);
         int ladder = 1;
         while (!reached.contains(endWord)){
-            Set<String> toAdd = new HashSet<>();
+            Set<String> temp = new HashSet<>();
             for (String str:reached){
                 for (int i=0;i<str.length();i++){
                     char[] chars = str.toCharArray();
-                    System.out.println(chars);
+                    //System.out.println(chars);
                     for (char ch = 'a';ch<='z';ch++){
                         chars[i] = ch;
                         //System.out.println("chars[i]:"+chars[i]);
                         String newStr = new String(chars);
                         if (dict.contains(newStr)){
-                            toAdd.add(newStr);
+                            temp.add(newStr);
                             dict.remove(newStr);
-                         //   System.out.println(toAdd);
+                           System.out.println(temp);
                         }
                     }
                 }
             }
             ladder += 1;
-            if (toAdd.size() == 0)
+            if (temp.size() == 0)
                 return 0;
-            reached = toAdd;
+            reached = temp;
         }
       //  System.out.println("final-->"+reached);
         return ladder;
     }
 }
 
+// To gurantee a shortest transformation - since this is a bfs solution, it will always check the possible result before it goes deeper
+
+
+
 time - 26 * l * m = 26 * length of the words * size of the reached set
 
-Basically I keep two sets of words, one set reached that represents the borders that have been reached with "distance" steps; 
+Basically I keep two sets of words, one set reached that represents the borders that have been reached with "distance"-->
+ladder variable steps; 
 another set wordDict that has not been reached. 
 In the while loop, for each word in the reached set, I give all variations and check if 
-it matches anything from wordDict, if it has a match, I add that word into toAdd set, which will be my "reached" set 
+it matches anything from wordDict, if it has a match, I add that word into temp set, which will be my "reached" set 
 in the next loop, and remove the word from wordDict because I already reached it in this step. 
-And at the end of while loop, I check the size of toAdd, which means that if I can't reach any new String from wordDict,
+And at the end of while loop, I check the size of temp, which means that if I can't reach any new String from wordDict,
 I won't be able to reach the endWord, then just return 0. Finally if the endWord is in reached set, 
 I return the current steps "distance".
 
 
-
+// To gurantee a shortest transformation - since this is a bfs solution, it will always check the possible result
+before it goes deeper
 
 
 
