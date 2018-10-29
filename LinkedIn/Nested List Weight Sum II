@@ -8,18 +8,17 @@ public int depthSumInverse(List<NestedInteger> nestedList) {
             if (ni.isInteger())
             {
                      unweighted += ni.getInteger();
-                  //  System.out.println(unweighted);
+                    System.out.println(unweighted);
             }
                
             else
                 nextLevel.addAll(ni.getList());
         }
         weighted += unweighted;
-            System.out.println(weighted);
-        nestedList = nextLevel;
+          //  System.out.println(weighted);
+        nestedList = nextLevel; // its only copying the references and not the value so its not O(N)
     }
     return weighted;
-}
 }
 
 ip:[1,[4,[6]]]
