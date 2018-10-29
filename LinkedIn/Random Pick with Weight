@@ -1,0 +1,39 @@
+class Solution {
+
+    List<Integer> psum = new ArrayList<>();
+    int tot = 0;
+    Random rand = new Random();
+
+    public Solution(int[] w) {
+        for (int x : w) {
+            System.out.println(x);
+            tot += x;
+            psum.add(tot);
+        }
+        System.out.println("psum"+psum);
+    }
+
+    public int pickIndex() {
+        int targ = rand.nextInt(tot); // generates a random value from 0 till that number - not inclusive of that number
+        
+        System.out.println(psum.size()-1);
+        
+
+        int lo = 0; // binary search
+        int hi = psum.size() - 1;
+        System.out.println("tot is "+tot+" target is "+targ+" hi is "+hi);
+        while (lo != hi)
+        {
+            int mid = (lo + hi) / 2;
+            if (targ >= psum.get(mid)) lo = mid + 1;
+            else hi = mid;
+        }
+        return lo;
+    }
+}
+
+/*
+We choose a random total from [1,total]. Lets call it randTotal. This satisfies our requirement for random pick.
+We try to find the smallest index where the sum till that index > randTotal. My reasoning for this step is, if we subtract the weight at this index, then the randTotal value would become larger, which would suggest that, the weight at the current index played a crucial role to satisfy the randTotal value. Hence this means, our answer is this current index.
+Finally, the randTotal value is randomized with sum of weights, this would ensure that the index value returned is random and optimal(proportional to weight) for given randTotal.
+*/
