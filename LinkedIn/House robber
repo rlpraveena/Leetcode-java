@@ -30,3 +30,6 @@ class Solution {
 for [2,7,9,3,1] ==> sum[]=[ 2 , 7, Max(7,9+2) , Max(11, 3+7), Max(11,12)] 
 
 Return the last element of sum as the result.
+
+Time:O(N)
+Space:O(1)
