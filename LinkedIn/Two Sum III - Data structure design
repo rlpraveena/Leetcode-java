@@ -33,3 +33,14 @@ Map<Integer, Integer> map;
     }
 }
 
+add(1); add(3); add(5);
+find(4) -> true
+find(7) -> false
+
+add(3); add(1); add(2);
+find(3) -> true
+find(6) -> false
+
+Add - O(1)
+Find - O(N)
+
