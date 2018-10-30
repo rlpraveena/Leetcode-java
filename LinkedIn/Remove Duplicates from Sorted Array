@@ -16,6 +16,13 @@ class Solution {
             
         }
         
+        
+           for(int i=0;i<len;i++)
+        {
+            System.out.println(nums[i]);
+        }
+        // to print the  array without the duplicates
+        
         return len;
      
     }   
