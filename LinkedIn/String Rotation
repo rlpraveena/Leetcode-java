@@ -1,0 +1,25 @@
+Check is s1 is a rotating match for s2.
+
+s1=bca
+s2=cab
+
+return true;
+
+import java.util.Scanner;
+
+public class StringCheck {
+	
+	public static void main(String[] args) {
+
+		Scanner scan=new Scanner(System.in);
+		String s1=scan.next();
+		String s2=scan.next();
+		String s=s2+s2;
+		if (s1.length() == s2.length()){
+			return s.contains(s1);
+		} else {
+			return false;
+		}
+}
+
+}
