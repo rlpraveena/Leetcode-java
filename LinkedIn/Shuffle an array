@@ -1,0 +1,47 @@
+public class Solution {
+
+    private int[] nums;
+    private Random random;
+
+    
+    public Solution(int[] nums) {
+        this.nums = nums;
+        random = new Random();
+
+        
+    }
+    
+    /** Resets the array to its original configuration and return it. */
+    public int[] reset() {
+        return nums;
+    }
+     public int[] shuffle() {
+
+        if(nums == null) return null;
+        int[] a = nums.clone(); // When the clone method is invoked upon an array, it returns a reference to a new array which contains (or references) the same elements as the source array.
+        for(int j = 1; j < a.length; j++) {
+            int i = random.nextInt(j + 1); //from 0 to j+1
+            swap(a, i, j);
+        }
+        return a;
+    }
+    
+    private void swap(int[] a, int i, int j) {
+        int t = a[i];
+        a[i] = a[j];
+        a[j] = t;
+    }
+}
+
+ip: ["Solution","shuffle","reset","shuffle"]
+[[[1,2,3]],[],[],[]]
+
+op: [null,[3,1,2],[1,2,3],[3,1,2]]
+
+Time complexity : O(n)
+
+The Fisher-Yates algorithm runs in linear time, as generating a random index and swapping two values can be done in constant time.
+
+Space complexity : O(n) //need it for reset
+
+
