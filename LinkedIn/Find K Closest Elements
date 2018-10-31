@@ -1,0 +1,43 @@
+
+The value k is positive and will always be smaller than the length of the sorted array.
+
+Will k be smaller than the length of the array?
+
+class Solution {
+        public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        int start = 0, end = arr.length-k;
+        
+        while(start<end) {
+            int mid = (start + end)/2;
+            if (x - arr[mid] > arr[mid+k]-x)
+                start = mid + 1;
+            else
+                end = mid;
+        }
+
+        List<Integer> results = new ArrayList<Integer>();
+        for(int i=start;i<start+k;i++){
+            results.add(arr[i]);
+        }
+        return results;
+        
+    }
+}
+
+
+Input: [1,2,3,4,5], k=4, x=3
+Output: [1,2,3,4]
+
+Input: [1,2,3,4,5], k=4, x=-1
+Output: [1,2,3,4]
+
+O(logN) for binary search
+O(K) for traversing through the array to add it to the list
+O(1) to add to the result
+hence,
+time - O(K)
+Binary search uses mid as pivot to find correct(best-fit position)
+Here the solution maintains [left, right) and init them accordingly, as left could reach zero and right could only reach arr.length - k - 1(remember the loop invariant is left < right as they can never meet)
+what the while loop does is trying to find a left pointer s.t. there is a k length interval has x surrounded and for each index < left, they will make x stays more close to the end
+
+when found the best-fit mid, which was then the left. starting from that point, following length k interval are the answers.
