@@ -29,3 +29,6 @@ class Solution {
 }
 
 // O(N) running time
+
+
+//Follow up, if not how to do BST, how much complexity? With heapq, nlogk
