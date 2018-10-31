@@ -1,0 +1,31 @@
+class Solution {
+    public List<Integer> closestKValues(TreeNode root, double target, int k) {
+        Deque<Integer> dq = new LinkedList<>();
+        
+        inorder(root, dq); // deque is a double sided queue where we can perform all the operations of queue like add,remove,peek,poll but from the first as well as the last - other than that the propertites are the same
+        
+        // We need to use inorder traversal because we want to obtain a sorted list of of the values in our BST to be added into the queue
+        // will be added to the queue in the following order - 1,2,3,4,5 
+        // the size will be 5
+        System.out.println(dq);
+        while (dq.size() > k) { // while dq.size() is greater than k,keep running 
+            // if the first value if more farther from the target than the last value --> remove first or remove last
+            if (Math.abs(dq.peekFirst() - target) > Math.abs(dq.peekLast() - target))
+                dq.pollFirst();
+            else 
+                dq.pollLast();
+        }
+        // in the end we will remain with K values in the list which are the closests to the target in the BST
+        
+        return new ArrayList<Integer>(dq);
+    }
+    
+    public void inorder(TreeNode root, Deque<Integer> dq) {
+        if (root == null) return;
+        inorder(root.left, dq);
+        dq.add(root.val);
+        inorder(root.right, dq);
+    }
+}
+
+// O(N) running time
