@@ -1,0 +1,60 @@
+    We need to first count how many times the pattern have appeared in the original string.
+    Otherwise, we need to copy the char array many times each time we replace a string.
+    (Since len(find) can be different from len(repl)).
+    
+    
+    Time: Suppose len(orig) = m, len(find) = n, then we need O(mn) time to count and O(m + count*n) time to replace.
+    Space: O(m), we need extra space to store the start index of a found pattern in the original string.
+
+    public static String replace(String orig, String find, String repl) {
+        List<Integer> index = findPattern(orig, find);
+        int count = index.size();
+        // compute length after replacement
+        int newLen = orig.length() + count * (repl.length() - find.length());
+        char[] result = new char[newLen];
+        // replace
+        int i = 0, k = 0;
+        int resultIndex = 0;
+        while( i < orig.length()) {
+            if (k < count && i == index.get(k)) {
+                for (int j = 0; j < repl.length(); ++j) {
+                    result[resultIndex++] = repl.charAt(j);
+                }
+                ++k;
+                i += find.length();
+            } else {
+                result[resultIndex++] = orig.charAt(i++);
+            }
+        }
+        return new String(result);
+    }
+
+    /**
+     * find how many times the pattern string have appeared in the orig string
+     * @param orig original string
+     * @param find pattern string to find
+     * @return a list of the start index of a fuond pattern in the original string
+     */
+    private static List<Integer> findPattern(String orig, String find) {
+        List<Integer> index = new ArrayList<Integer>();
+        int i = 0, j = 0;
+        // count how many times "find" have appeared
+        while (i + find.length() <= orig.length()) {
+            int k = i;
+            j = 0;
+            while (j < find.length()) {
+                if (orig.charAt(k) != find.charAt(j)) {
+                    break;
+                }
+                ++k;
+                ++j;
+            }
+            if (j == find.length()) {
+                index.add(i);
+                i += find.length();
+            } else {
+                ++i;
+            }
+        }
+        return index;
+    }
