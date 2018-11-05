@@ -1,0 +1,53 @@
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        
+        List<Integer> list=new LinkedList<Integer>();
+        helper(root,list);
+        return list;
+	}
+    void helper(TreeNode root,List<Integer> list)
+    {
+        if(root==null) return;
+        list.add(root.val);
+        helper(root.left,list);
+        helper(root.right,list);
+    }
+}
+
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        
+        List<Integer> list=new LinkedList<Integer>();
+        if(root==null) return list;
+        list.add(root.val);
+        list.addAll(preorderTraversal(root.left));
+        list.addAll(preorderTraversal(root.right));
+        return list;
+        
+    }
+}
+public class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<Integer>();
+        if (root == null) return result;
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.push(root);
+        while (!stack.isEmpty()){
+            TreeNode node = stack.pop();
+            result.add(node.val);
+            if (node.right != null) stack.push(node.right);
+            if (node.left != null) stack.push(node.left);
+        }
+        return result;
+    }
+}
+
+Time - O(N) for all
+Input: [1,null,2,3]
+   1
+    \
+     2
+    /
+   3
+
+Output: [1,2,3]
