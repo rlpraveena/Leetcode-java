@@ -1,0 +1,22 @@
+class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        
+        Map<Integer,Integer> map = new HashMap<>();
+        
+        for(int n : nums)
+        {
+            map.put(n,map.getOrDefault(n,0) +1 );
+        }
+        
+        List<Integer> list = new ArrayList<>(map.keySet());
+        
+        Collections.sort(list,
+                        (w1,w2) -> map.get(w1).equals(map.get(w2)) ? w1.compareTo(w2) : map.get(w2) - map.get(w1)         );
+        
+         // It's to deal with tiebreakers. If strings a and b have the same count, then use compareTo to compare the strings by 
+         their natural ordering(alphabetical order). If they do not have the same count, sort them by their frequencies (a.getValue() - b.getValue())
+        
+        return list.subList(0,k);
+        
+    }
+}
