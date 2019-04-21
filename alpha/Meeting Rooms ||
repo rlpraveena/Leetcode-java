@@ -1,0 +1,32 @@
+class Solution {
+    public int minMeetingRooms(int[][] intervals) {
+      
+        if (intervals == null || intervals.length == 0) return 0;
+      
+        Arrays.sort(intervals, new Comparator<int[]>(){
+            @Override public int compare(int[] o1, int[] o2) {
+                return o1[0] - o2[0];
+            }
+        });
+      
+
+        PriorityQueue<int[]> pq = new PriorityQueue<int[]>(intervals.length, (int []a, int []b) -> a[1] - b[1]);      
+        pq.add(intervals[0]);
+      
+
+        for (int i = 1; i < intervals.length; i++) {
+            int[] peek = pq.peek();
+            if (intervals[i][0] >= peek[1]) pq.remove();
+            pq.offer(intervals[i]);          
+        }
+    
+//       to print the contents of priority queue
+//       for (int i =1; i < intervals.length; i++) {
+//             int[] poll = pq.poll();
+//         System.out.println(poll[0]+" "+poll[1]);
+//       }
+        
+      
+        return pq.size();     
+    }
+}
